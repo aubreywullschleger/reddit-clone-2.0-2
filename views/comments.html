@@ -1,0 +1,12 @@
+<div ng-controller="PostController">
+  <!-- <form>
+    <input type="text" placeholder="write a comment">
+    <input type="submit" value="add your comment">
+  </form> -->
+  <button ng-click="toggle()">show comments</button>
+  <article ng-show="visible" ng-repeat="comment in comments">
+    <ul>
+      <li>{{comment}}</li>
+    </ul>
+  </article>
+</div>
