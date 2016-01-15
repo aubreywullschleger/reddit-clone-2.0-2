@@ -1,10 +1,8 @@
-app.controller('PostController', ['$scope', 'CommentService', function($scope, CommentService) {
+app.controller('PostController', ['$scope', 'PostsService', '$location', function($scope, PostsService, $location) {
 
 $scope.postObj = {
   date: new Date()
 };
-
-$scope.posts = [];
 
 $scope.submitPost = function(isValid) {
   var postObj = {
@@ -19,25 +17,10 @@ $scope.submitPost = function(isValid) {
   };
 
   if(isValid) {
-    $scope.posts.push(postObj);
+    PostsService.set(postObj);
+    $location.path('/');
   } else {
     alert('all fields are required');
   };
-};
-
-$scope.showComments = function(b) {
-  b.showState = true;
-};
-
-$scope.addComment = function(b) {
-  b.comments.push(b.newComment);
-};
-
-$scope.upvote = function(obj) {
-  obj.votes += 1;
-};
-
-$scope.downvote = function(obj) {
-  obj.votes -= 1;
 };
 }]);

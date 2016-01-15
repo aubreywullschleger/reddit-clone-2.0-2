@@ -1,0 +1,63 @@
+<div ng-controller="DisplayPostController">
+  <div class="searchByDropdown">
+    <input class="search" type="text" ng-model="query[queryBy]" placeholder="search posts by: ">
+    <div class="dropdown">
+      <select ng-model="queryBy" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class="caret"></span>
+          <option value="title">title</option>
+          <option value="author">author</option>
+          <option value="votes">votes</option>
+      </select>
+    </div>
+  </div>
+  <article class="postArticle" ng-repeat="post in posts | filter:query | orderBy: '-votes' ">
+    <div class="postVotesObj">
+      <button type="button" class="btn btn-default btn-sm" ng-click="upvote(post)">
+        <span class="glyphicon glyphicon-chevron-up arrow"></span>
+      </button>
+      <h4 class="voteNumber">{{post.votes}}</h4>
+      <button type="button" class="btn btn-default btn-sm" ng-click="downvote(post)">
+        <span class="glyphicon glyphicon-chevron-down arrow"></span>
+      </button>
+    </div>
+    <div class="postTextObj">
+      <h3>
+        <strong>title: </strong>
+        {{post.title}}
+      </h3>
+      <h4>
+        <strong>posted by: </strong>
+        {{post.author}}
+      </h4>
+      <p>
+        <strong>description: </strong>
+        {{post.description}}
+      </p>
+      <p>
+        <strong>
+          <span>{{post.date | amCalendar | lowercase}}</span>
+        </strong>
+      </p>
+    </div>
+    <div class="showComments">
+      <a href="" ng-click="showComments(post)">show comments</a>
+      <br>
+      <a ng-click="post.showState=false">hide comments</a>
+      <br>
+      <br>
+      <section ng-show="post.showState">
+        <strong><span>all comments for: <em>{{post.title}}</em></span></strong>
+        <hr>
+        <article ng-repeat="comment in post.comments">
+          <div>{{comment}}</div>
+          <hr>
+        </article>
+      </section>
+
+      <form class="commentForm">
+        <input type="text" placeholder="write your comment" ng-model="post.newComment">
+        <input type="submit" ng-click="addComment(post)" placeholder="add your comment">
+      </form>
+    </div>
+  </article>
+</div>

@@ -1,0 +1,22 @@
+<div ng-controller="PostController">
+  <form  class="postForm" name='postForm' ng-submit='submitPost(postForm.$valid)' novalidate='' method='post'>
+    <div class="postInput" ng-class="{ 'has-error' : postForm.title.$invalid && !postForm.title.$pristine }">
+            <input type="text" class="titleInput" name="title" id="title" ng-model="title" placeholder="title" required>
+            <p ng-show="postForm.title.$invalid && !postForm.title.$pristine">title is required</p>
+    </div>
+    <div class="postInput" ng-class="{ 'has-error' : postForm.author.$invalid && !postForm.author.$pristine }">
+            <input type="text" class="authorInput" name="author" id="author" ng-model="author" placeholder="author" required>
+            <p ng-show="postForm.author.$invalid && !postForm.author.$pristine">author is required</p>
+    </div>
+    <div class="postInput" ng-class="{ 'has-error' : postForm.imageUrl.$invalid && !postForm.imageUrl.$pristine }">
+            <input type="text" class="imageUrlInput" name="imageUrl" id="imageUrl" ng-model="imageUrl" placeholder="imageUrl" required>
+            <p ng-show="postForm.imageUrl.$invalid && !postForm.imageUrl.$pristine">image url is required</p>
+    </div>
+    <div class="postInput" ng-class="{ 'has-error' : postForm.description.$invalid && !postForm.description.$pristine }">
+            <input type="text" class="descriptionInput" name="description" id="description" ng-model="description" placeholder="description" required>
+            <p ng-show="postForm.description.$invalid && !postForm.description.$pristine">description is required</p>
+    </div>
+        <button type="submit" class="btn btn-primary postInput submitPostBtn" ng-disabled="userForm.$invalid">create new post</button>
+  </form>
+
+</div>

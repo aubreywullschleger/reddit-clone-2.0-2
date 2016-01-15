@@ -1,0 +1,28 @@
+<!-- new post form -->
+<div class="col-sm-8 col-centered">
+  <form name='postForm' ng-submit='submitPost(postForm.$valid)' novalidate='' method='post'>
+    <div class="well">
+      <fieldset class="form-group" ng-class="{ 'has-error' : postForm.title.$invalid && !postForm.title.$pristine }">
+        <label for="title">post title</label>
+        <input type="text" class="form-control" name="title" id="title" ng-model="title" placeholder="title" required>
+        <small class="text-muted" ng-show="postForm.title.$invalid && !postForm.title.$pristine">title is required</small>
+      </fieldset>
+      <fieldset class="form-group" ng-class="{ 'has-error' : postForm.author.$invalid && !postForm.author.$pristine }">
+        <label for="author">post author</label>
+        <input type="text" class="form-control" name="author" id="author" ng-model="author" placeholder="author" required>
+        <small class="text-muted" ng-show="postForm.author.$invalid && !postForm.author.$pristine">author is required</small>
+      </fieldset>
+      <fieldset class="form-group" ng-class="{ 'has-error' : postForm.imageUrl.$invalid && !postForm.imageUrl.$pristine }">
+        <label for="imageUrl">post image url</label>
+        <input type="text" class="form-control" name="imageUrl" id="imageUrl" ng-model="imageUrl" placeholder="image url" required>
+        <small class="text-muted" ng-show="postForm.imageUrl.$invalid && !postForm.imageUrl.$pristine">image url is required</small>
+      </fieldset>
+      <fieldset class="form-group" ng-class="{ 'has-error' : postForm.description.$invalid && !postForm.description.$pristine }" required>
+        <label for="description">post description</label>
+        <textarea class="form-control" name="description" id="description" ng-model="description" rows="4" placeholder="write something" required></textarea>
+        <small class="text-muted" ng-show="postForm.description.$invalid && !postForm.description.$pristine">description is required</small>
+      </fieldset>
+      <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">create new post</button>
+    </div>
+  </form>
+</div>

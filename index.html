@@ -2,65 +2,57 @@
 <html lang="en" ng-app="redditCloneApp">
 <head>
   <meta charset="UTF-8">
-  <title>reddit clone 2.0</title>
+  <title>reddit-clone-2.0</title>
+
+  <!-- minified angular and angular-route  -->
   <script src="https://code.angularjs.org/1.5.0-rc.0/angular.min.js"></script>
   <script src="https://code.angularjs.org/1.5.0-rc.0/angular-route.min.js"></script>
-  <script type="text/javascript" src="app.js"></script>
+
+  <!-- momentJS and angular-moment -->
   <script type="text/javascript" src="./node_modules/moment/moment.js"></script>
   <script type="text/javascript" src="./node_modules/angular-moment/angular-moment.js"></script>
-  <script type="text/javascript" src="./services/CommentService.js"></script>
+
+  <!-- app, services, and controllers -->
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="./services/PostsService.js"></script>
   <script type="text/javascript" src="./controllers/PostController.js"></script>
+  <script type="text/javascript" src="./controllers/DisplayPostController.js"></script>
+
+  <!-- latest compiled and minified JavaScript and jQuery -->
+  <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  <!-- latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="http://bootswatch.com/readable/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-  <main ng-controller="PostController">
-    <form name='postForm' ng-submit='submitPost(postForm.$valid)' novalidate='' method='post'>
-      <div ng-class="{ 'has-error' : postForm.title.$invalid && !postForm.title.$pristine }">
-              <input type="text" name="title" id="title" ng-model="title" placeholder="title" required>
-              <p ng-show="postForm.title.$invalid && !postForm.title.$pristine">title is required</p>
+
+  <!-- static navbar -->
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#/">reddit clone 2.0</a>
       </div>
-      <div ng-class="{ 'has-error' : postForm.author.$invalid && !postForm.author.$pristine }">
-              <input type="text" name="author" id="author" ng-model="author" placeholder="author" required>
-              <p ng-show="postForm.author.$invalid && !postForm.author.$pristine">author is required</p>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#/">view all posts</a></li>
+          <li><a href="#/new">create new post</a></li>
+        </ul>
       </div>
-      <div ng-class="{ 'has-error' : postForm.imageUrl.$invalid && !postForm.imageUrl.$pristine }">
-              <input type="text" name="imageUrl" id="imageUrl" ng-model="imageUrl" placeholder="imageUrl" required>
-              <p ng-show="postForm.imageUrl.$invalid && !postForm.imageUrl.$pristine">imager url is required</p>
-      </div>
-      <div ng-class="{ 'has-error' : postForm.description.$invalid && !postForm.description.$pristine }">
-              <input type="text" name="description" id="description" ng-model="description" placeholder="description" required>
-              <p ng-show="postForm.description.$invalid && !postForm.description.$pristine">description is required</p>
-      </div>
-          <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">create new post</button>
-      </form>
-      <article ng-repeat="post in posts | orderBy: '-votes'">
-        <div>
-          <button ng-click="upvote(post)">upvote</button>
-          <p>{{post.votes}}</p>
-          <button ng-click="downvote(post)">downvote</button>
-        </div>
-        <div>
-          <h3>title: {{post.title}} posted by: {{post.author}}</h3>
-          <p>
-            <strong>description: </strong>
-            {{post.description}}
-          </p>
-          <p>
-            <strong><span>{{post.date | amCalendar}}</span></strong>
-          </p>
-        </div>
-        <div>
-          <ul ng-show="post.showState" ng-repeat="comment in post.comments">
-            <li>{{comment}}</li>
-          </ul>
-          <a href="" ng-click="showComments(post)">Show</a>
-          <button ng-click="post.showState=false">Hide</button>
-          <form>
-            <input type="text" placeholder="write your comment" ng-model="post.newComment">
-            <input type="submit" ng-click="addComment(post)" placeholder="add your comment">
-          </form>
-        </div>
-      </article>
-  </main>
+    </div>
+  </div>
+
+  <!-- dynamic views -->
+  <main ng-view></main>
+
 </body>
 </html>

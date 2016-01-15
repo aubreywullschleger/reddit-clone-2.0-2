@@ -1,0 +1,105 @@
+<!-- search posts -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-centered">
+      <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">search posts by <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">title</a></li>
+            <li><a href="#">author</a></li>
+            <li><a href="#">number of votes</a></li>
+          </ul>
+        </div>
+        <input type="text" class="form-control" aria-label="keyword search" placeholder="keyword">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<!-- post object -->
+<div class="row" ng-repeat="post in posts | filter:query | orderBy: '-votes' ">
+  <div class="col-sm-8 col-centered">
+    <div class="thumbnail">
+      <div class="row">
+        <div class="col-xs-10 col-centered ">
+          <div class="well clearfix">
+            <div class="col-xs-1">
+              <div class="btn-group-xs btn-group-vertical " role="group">
+                <button class="btn btn-default" ng-click="upvote(post)">
+                  <span class="glyphicon glyphicon-chevron-up arrow"></span>
+                </button>
+                <h4>{{post.votes}}</h4>
+                <button class="btn btn-default" ng-click="downvote(post)">
+                  <span class="glyphicon glyphicon-chevron-down arrow"></span>
+                </button>
+              </div>
+            </div>
+            <div class="col-xs-10">
+              <div class="media">
+                <div class="media-left media-top">
+                  <div class="well">
+                    <img class="media-object" src="{{post.imageUrl}}" alt="image">
+                  </div>
+                </div>
+                <div class="media-body">
+                  <h3 class="media-heading">{{post.title}}</h3> <small><em>by: </em>{{post.author}}</small>
+                  <br>
+                  <small><em>posted: </em>{{post.date | amCalendar | lowercase}}</small>
+                  <br>
+                  <br>
+                  <p>{{post.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- show and hide comments buttons -->
+        <div class="row">
+          <div class="col-xs-10 col-centered">
+            <div class="well">
+                <button class="btn btn-info" ng-click="showComments(post)">show comments</button>
+                <button class="btn btn-info" ng-click="post.showState=false">hide comments</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- comments -->
+        <div class="row" ng-show="post.showState">
+          <div class="col-xs-10 col-centered">
+            <div class="well">
+              <strong><span>all comments for: <em>{{post.title}}</em></span></strong>
+              <hr>
+              <div class="caption" ng-repeat="comment in post.comments">
+                <p>{{comment}}</p>
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- comment form -->
+        <div class="row">
+          <div class="col-xs-10 col-centered">
+            <div class="well">
+              <form>
+                <fieldset class="form-group">
+                  <label for="comment">comment: </label>
+                  <input type="text" placeholder="write your comment" ng-model="post.newComment">
+                </fieldset>
+                <button type="submit" class="btn btn-primary" ng-click="addComment(post)">add your comment</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
+</div>

@@ -1,3 +1,10 @@
-div {
-  display: inline-block;
+/*img {
+  width: 61.75vw;
+  height: 45vh;
+  background: url('./images/background-wallpaper-170.jpg');
+}*/
+
+.col-centered{
+float: none;
+margin: 0 auto;
 }
