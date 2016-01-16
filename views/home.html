@@ -4,17 +4,13 @@
     <div class="col-sm-8 col-centered">
       <div class="input-group">
         <div class="input-group-btn">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">search posts by <span class="caret"></span></button>
+          <button type="button" ng-model="queryBy" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">search posts by <span class="caret"></span></button>
           <ul class="dropdown-menu">
-            <li><a href="#">title</a></li>
-            <li><a href="#">author</a></li>
-            <li><a href="#">number of votes</a></li>
+            <li><a href="" value="title">title</a></li>
+            <li><a href="" value="author">author</a></li>
           </ul>
         </div>
-        <input type="text" class="form-control" aria-label="keyword search" placeholder="keyword">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">Go!</button>
-        </span>
+        <input type="text" class="form-control" aria-label="keyword search" placeholder="keyword" ng-model="query[queryBy]">
       </div>
     </div>
   </div>
