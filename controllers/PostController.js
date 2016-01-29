@@ -18,6 +18,7 @@ $scope.submitPost = function(isValid) {
 
   if(isValid) {
     PostsService.set(postObj);
+    console.log(postObj.image);
     $location.path('/');
   } else {
     alert('all fields are required');
